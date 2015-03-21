@@ -26,13 +26,13 @@ module.exports=function($routeProvider,$locationProvider,$httpProvider) {
 		controller: 'BeersController'
 	}).when('/beers/new', {
 		templateUrl: 'templates/beers/beerForm.html',
-		controller: 'BeersAddController'
+		controller: 'BeerAddController'
 	}).when('/beers/details', {
 		templateUrl: 'templates/beers/beerDetails.html',
 		controller: 'BeerDetailController'
 	}).when('/beers/update', {
 		templateUrl: 'templates/beers/beerForm.html',
-		controller: 'BeersUpdateController'
+		controller: 'BeerUpdateController'
 	}).when('/saves', {
 		templateUrl: 'templates/saveMain.html',
 		controller: 'SaveController'

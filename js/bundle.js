@@ -269,7 +269,7 @@ module.exports=function($scope,config,$location,rest,save,$document,modalService
 };
 },{}],9:[function(require,module,exports){
 module.exports=function($scope,config,$location,rest,save,$document,modalService, $controller){
-/*	$controller('BeerAddController', {$scope: $scope});
+$controller('BeerAddController', {$scope: $scope});
 
 	if(angular.isUndefined(config.activeBeer)){
 		$location.path("beers/");
@@ -343,7 +343,7 @@ module.exports=function($scope,config,$location,rest,save,$document,modalService
 			result=true;
 		}
 		return result;
-	}*/
+	}
 };
 },{}],10:[function(require,module,exports){
 module.exports=function($scope,rest,$timeout,$location,config,$route,save) {
@@ -738,13 +738,13 @@ module.exports=function($routeProvider,$locationProvider,$httpProvider) {
 		controller: 'BeersController'
 	}).when('/beers/new', {
 		templateUrl: 'templates/beers/beerForm.html',
-		controller: 'BeersAddController'
+		controller: 'BeerAddController'
 	}).when('/beers/details', {
 		templateUrl: 'templates/beers/beerDetails.html',
 		controller: 'BeerDetailController'
 	}).when('/beers/update', {
 		templateUrl: 'templates/beers/beerForm.html',
-		controller: 'BeersUpdateController'
+		controller: 'BeerUpdateController'
 	}).when('/saves', {
 		templateUrl: 'templates/saveMain.html',
 		controller: 'SaveController'

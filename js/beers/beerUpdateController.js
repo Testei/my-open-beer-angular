@@ -1,5 +1,5 @@
 module.exports=function($scope,config,$location,rest,save,$document,modalService, $controller){
-/*	$controller('BeerAddController', {$scope: $scope});
+$controller('BeerAddController', {$scope: $scope});
 
 	if(angular.isUndefined(config.activeBeer)){
 		$location.path("beers/");
@@ -73,5 +73,5 @@ module.exports=function($scope,config,$location,rest,save,$document,modalService
 			result=true;
 		}
 		return result;
-	}*/
+	}
 };
