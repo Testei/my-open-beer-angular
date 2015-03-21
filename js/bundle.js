@@ -256,31 +256,6 @@ module.exports=function($scope,config,$location,rest,save,$document,modalService
 		event.preventDefault();
 		return;
 	});
-	
-	$scope.update=function(beer,force,callback){
-		if($scope._update(beer,force,callback)==true){
-			$location.path("beers");
-		}
-	};
-	$scope._update=function(beer,force,callback){
-		var result=false;
-		if(angular.isUndefined(beer)){
-			beer=$scope.activeBeer;
-		}
-		$scope.data.posted={
-			"name" : beer.name,
-			"description"  : beer.description
-		};
-		$scope.data.beers.push(beer);
-		beer.created_at=new Date();
-		if(config.beers.update==="immediate" || force){
-			rest.post($scope.data,"beers",beer.name,callback);
-		}else{
-			save.addOperation("New",$scope.update,beer);
-			result=true;
-		}
-		return result;
-	}
 };
 },{}],9:[function(require,module,exports){
 
@@ -710,6 +685,7 @@ module.exports=function($scope,config,$location){
 		if($scope.frmConfig.$dirty){
 			config.server=$scope.config.server;
 			config.breweries=$scope.config.breweries;
+			config.beers.$scope.config.beers;
 		}
 		$location.path("/");
 	};
