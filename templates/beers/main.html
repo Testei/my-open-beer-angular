@@ -43,7 +43,6 @@
 			<th data-sort-by data-field="description" data-ref="sortBy">description </th> <!-- TODO : afficher que la premiere ligne et agrandir en passant dessu, bootstrap -->
 			<th data-sort-by data-field="created_at" data-ref="sortBy">Created at </th>
 			<th>Updated at</th>
-			<th>Voir plus!</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -55,8 +54,11 @@
 			</td>
 			<td>{{beer.description}}</td>
 			<td>{{beer.created_at | date:'dd/MM/yy HH:mm:ss'}}</td>
-			<td>{{beer.updated_at | date:'dd/MM/yy HH:mm:ss'}}</td>
-			<td><a href="beers/details" class="btn btn-warning">voir la bière</a></td>
+			<td>{{beer.updated_at | date:'dd/MM/yy HH:mm:ss'}}</td>		
+			<td><div class="btn-group" role="group" aria-label="VoirDetail">
+				<a class="btn btn-default" data-ng-show="showUpdate()" data-ng-click="see()">Voir la bière</a>
+				</div>
+			</td>
 		</tr>
 	</tbody>
 </table>

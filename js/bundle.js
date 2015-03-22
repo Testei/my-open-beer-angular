@@ -229,16 +229,16 @@ module.exports=function($scope,config,$location,rest,save,$document,modalService
 };
 },{}],8:[function(require,module,exports){
 module.exports=function($scope,config,$location,rest,save,$document,modalService, $controller){
-	
-/*
+$controller('BeerDetailController', {$scope: $scope});
+
 	if(angular.isUndefined(config.activeBeer)){
 		$location.path("beers/");
 	}
 	$scope.activeBeer=config.activeBeer;
 	
-	$scope._update=function(beer,force,callback){
+	$scope._details=function(beer,force,callback){
 		var result=false;
-		if(force || $scope.frmBeer.$dirty){
+		if(force || $scope.detailsBeer.$dirty){
 			if(angular.isUndefined(beer)){
 				beer=$scope.activeBeer;
 			}else{
@@ -252,20 +252,12 @@ module.exports=function($scope,config,$location,rest,save,$document,modalService
 			
 			config.activeBeer.reference.name=$scope.activeBeer.name;
 			config.activeBeer.reference.description=$scope.activeBeer.description;
-			config.activeBeer.reference.updated_at=new Date();
 			
-			if(config.beers.update==="immediate" || force)
-				rest.put(config.activeBeer.id,$scope.data,"beers",config.activeBeer.name,callback);
-			else{
-				config.activeBeer.reference.flag="Updated";
-				save.addOperation("Updated",$scope.update,config.activeBeer.reference);
-				result=true;
-			}
 		}else{
 			result=true;
 		}
 		return result;
-	}*/
+	}
 };
 },{}],9:[function(require,module,exports){
 module.exports=function($scope,config,$location,rest,save,$document,modalService, $controller){
@@ -338,6 +330,10 @@ module.exports=function($scope,rest,$timeout,$location,config,$route,save) {
 		return angular.isDefined($scope.activeBeer);
 	};
 	
+	$scope.showDetails=function(){
+		return angular.isDefined($scope.activeBeer);
+	};
+	
 	$scope.refreshOnAsk=function(){
 		return config.beers.refresh == 'ask';
 	};
@@ -392,12 +388,22 @@ module.exports=function($scope,rest,$timeout,$location,config,$route,save) {
 	$scope.edit=function(beer){
 		if(angular.isDefined(beer))
 			$scope.activeBeer=beer;
-		config.activeBeer=angular.copy($scope.activeBeer);
-		config.activeBeer.reference=$scope.activeBeer;
-		$location.path("beers/update");
+			config.activeBeer=angular.copy($scope.activeBeer);
+			config.activeBeer.reference=$scope.activeBeer;
+			$location.path("beers/update");
 	}
 	
-	$scope.update=function(beer,force,callback){
+
+	
+	$scope.see=function(beer){
+		if(angular.isDefined(beer))
+			$scope.activeBeer=beer;
+			config.activeBeer=angular.copy($scope.activeBeer);
+			config.activeBeer.reference=$scope.activeBeer;
+			$location.path("beers/details");
+	}
+	
+	$scope.details=function(beer,force,callback){
 		if(angular.isUndefined(beer)){
 			beer=$scope.activeBeer;
 		}
@@ -407,14 +413,6 @@ module.exports=function($scope,rest,$timeout,$location,config,$route,save) {
 		    "brewery" : beer.idBrewery
 		  }
 		};
-		$scope.data.beers.push(beer);
-		beer.created_at=new Date();
-			if(config.beers.update==="immediate" || force){
-				rest.post($scope.data,"beers",beer.name,callback);
-			}else{
-				save.addOperation("New",$scope.update,beer);
-				$location.path("beers");
-			}
 	}
 	
 	$scope.remove=function(){
@@ -425,6 +423,8 @@ module.exports=function($scope,rest,$timeout,$location,config,$route,save) {
 		});
 		return true;
 	};
+	
+	
 	$scope.removeOne=function(beer,force,callback){
 		if(config.beers.update==="immediate" || force){
 			beer.deleted=true;
