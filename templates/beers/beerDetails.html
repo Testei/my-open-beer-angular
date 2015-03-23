@@ -1,7 +1,7 @@
-<div name="detailsBeer" data-ng-submit="detailsBeer.$valid && update()" novalidate data-ng-init="setFormScope(this)">
+<!--  <div name="detailsBeer" data-ng-submit="detailsBeer.$valid && update()" novalidate data-ng-init="setFormScope(this)">
 		<div class="form-group" data-ng-class="{'has-error has-feedback': detailsBeer.name.$invalid && detailsBeer.name.$dirty}">
 			<label for="name">Nom</label>
-			<input class="form-control" type="text" data-ng-model="activeBeer.name" placeholder="Entrez un nom..." required id="name" name="name">
+			<p  type="text" data-ng-model="activeBeer.name" name="name">{{activeBeer.name}}</p>
 			<span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true"></span>
 		</div>
 		<div class="form-group" data-ng-class="{'has-error has-feedback': detailsBeer.url.$invalid && detailsBeer.url.$dirty }">
@@ -13,5 +13,53 @@
 			<input class="form-control" type="text" data-ng-model="activeBeer.created_at" id="created_at" name="created_at" disabled="disabled">
 		</div>
 		<button type="submit" class="btn btn-default" data-ng-click="exit=true">Valider</button>
-		&nbsp;<a href="beers" class="btn btn-default" data-ng-click="exit=true">Retour à la liste des bieres</a>
+		&nbsp;<a href="beers" class="btn btn-default" data-ng-click="exit=true"></a>
+</div> -->
+<div class="panel panel-default">
+
+	<div class="panel-heading">{{activeBeer.name}}</div>
+
+		<div class="panel-body">
+			
+			<div class="row">
+
+			<div class="col-sm-2">
+				<img width="200px" height="350px" class="img-rounded" ng-src="{{'img/' + activeBeer.photo}}"/>
+			</div>
+
+			<div class="col-sm-8 col-sm-offset-1">
+				<p class="form-control">{{activeBeer.name}}</p>
+				<p class="well">{{activeBeer.description}}</p>
+			
+				<div class="row">
+					
+					<div class="col-sm-6">
+						<p class="form-control">{{activeBeer.created_at}}</p>
+					</div>
+					
+					<div class="col-sm-6">
+						<p class="form-control">{{activeBeer.updated_at}}</p>
+					</div>
+				</div>
+
+
+				<div class="row">
+					<div class="col-sm-9">
+						<p class="form-control">{{viewBreweryName()}}</p>
+					</div>
+
+					<div class="col-sm-3">
+						<button class="btn btn-default" ng-click="viewBrewery()">Voir la brasserie</button>
+					</div>
+
+					<div class="col-sm-3">
+						<br>
+						<button class="btn btn-default" ng-click="viewBeers()"><span class="glyphicon glyphicon-arrow-left"></span>Retour à la liste des bieres</button>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
 </div>

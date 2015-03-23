@@ -1,12 +1,32 @@
-module.exports=function($scope,config,$location,rest,save,$document,modalService, $controller){
-$controller('BeerDetailController', {$scope: $scope});
+module.exports=function($scope,config,$location,rest,$document,modalService){
+
+	$scope.data = {};
 
 	if(angular.isUndefined(config.activeBeer)){
 		$location.path("beers/");
 	}
 	$scope.activeBeer=config.activeBeer;
 	
-	$scope._details=function(beer,force,callback){
+	var brewery = "breweries/" + config.activeBeer.idBrewery;
+	rest.getAll($scope.data, brewery);
+	
+	$scope.viewBeers = function(){
+		$location.path("beers/");
+	};
+
+	$scope.viewBreweryName = function(){
+		return $scope.data[brasserie].name; 
+	}
+/*
+	$scope.viewBrewery = function(){
+		if(angular.isDefined($scope.data[brasserie]))
+		config.activeBrewery=angular.copy($scope.data[brasserie]);
+		config.activeBrewery.reference=$scope.data[brasserie];
+		$location.path("breweries/details");
+	}
+*/
+	
+	/*$scope._details=function(beer,force,callback){
 		var result=false;
 		if(force || $scope.detailsBeer.$dirty){
 			if(angular.isUndefined(beer)){
@@ -27,5 +47,5 @@ $controller('BeerDetailController', {$scope: $scope});
 			result=true;
 		}
 		return result;
-	}
+	}*/
 };
