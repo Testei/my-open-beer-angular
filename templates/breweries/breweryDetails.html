@@ -1,0 +1,30 @@
+<div class="panel panel-default">
+	<div class="panel-heading">{{activeBrewery.name}}</div>	
+		<div class="panel-body">	
+			<div class="row">
+			<div class="col-sm-2">
+				<img width="250px" height="250px" class="img-rounded" ng-src="{{'img/' + activeBrewery.photo}}"/>
+			</div>
+			<div class="col-sm-8 col-sm-offset-1">
+				<p class="form-control">{{activeBrewery.name}}</p>
+				<p class="form-control">{{activeBrewery.url}}</p>
+				<div class="row">
+					<div class="col-sm-6">
+						<p class="form-control">{{activeBrewery.created_at}}</p>
+					</div>
+					<div class="col-sm-6">
+						<p class="form-control">{{activeBrewery.updated_at}}</p>
+					</div>	
+					<br>
+					<div class="col-sm-6">
+						<button class="btn btn-default" ng-show="countBeers() > 0" ng-click="viewBeers()">{{"Display their Beers (" + countBeers() + ")"}}</button>
+					</div>
+					<div class="col-sm-6">
+						<a href="breweries" class="btn btn-default" data-ng-click="exit=true"> Voir les bières ( {{countBeers()}} ) </a>
+						<a href="breweries" class="btn btn-default" data-ng-click="exit=true"> retour à la liste des brasseries</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

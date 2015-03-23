@@ -52,6 +52,11 @@
 			<td>{{brewery.url}}</td>
 			<td>{{brewery.created_at | date:'dd/MM/yy HH:mm:ss'}}</td>
 			<td>{{brewery.updated_at | date:'dd/MM/yy HH:mm:ss'}}</td>
+			<td>
+				<div class="btn-group" role="group" aria-label="VoirDetail">
+					<a class="btn btn-default" data-ng-show="showUpdate()" data-ng-click="see()">Voir la brasserie</a>
+				</div>
+			</td>
 		</tr>
 	</tbody>
 </table>
