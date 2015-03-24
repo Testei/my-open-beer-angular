@@ -102,7 +102,7 @@ module.exports=function($http,$resource,$location,restConfig,$sce) {
 	this.clearMessages=function(){
 		self.messages.length=0;
 	};
-	
+	// FONCTION connecter : http://slamwiki.kobject.net/slam4/richclient/angularjs/project/openbeerdatabase/rest
 	this.connect=function(response,callback){
 		var request = $http({
 		   method: "POST",

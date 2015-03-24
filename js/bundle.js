@@ -142,6 +142,7 @@ controller("MainController", ["$scope","$location","save","$window",require("./m
 controller("SaveController", ["$scope","$location","save",require("./save/saveController")]).
 service("rest", ["$http","$resource","$location","config","$sce",require("./services/rest")]).
 service("save", ["rest","config","$route",require("./services/save")]).
+service("connect", ["rest","config","$route",require("./services/connection")]).
 config(["$routeProvider","$locationProvider","$httpProvider",require("./config")]).
 filter("NotDeletedFilter",require("./addons/notDeletedFilter")).
 directive("sortBy", [require("./addons/sortBy")]).
@@ -171,7 +172,7 @@ run(['$rootScope','$location', '$routeParams', function($rootScope, $location, $
 }]
 ).factory("config", require("./config/configFactory"));
 
-},{"./addons/drag":1,"./addons/modal":2,"./addons/modalService":3,"./addons/notDeletedFilter":4,"./addons/sortBy":5,"./beers/beersModule":11,"./breweries/breweriesModule":13,"./config":17,"./config/configFactory":19,"./config/configModule":20,"./mainController":21,"./save/saveController":22,"./services/rest":23,"./services/save":24}],7:[function(require,module,exports){
+},{"./addons/drag":1,"./addons/modal":2,"./addons/modalService":3,"./addons/notDeletedFilter":4,"./addons/sortBy":5,"./beers/beersModule":11,"./breweries/breweriesModule":13,"./config":17,"./config/configFactory":19,"./config/configModule":20,"./mainController":21,"./save/saveController":22,"./services/connection":23,"./services/rest":24,"./services/save":25}],7:[function(require,module,exports){
 module.exports=function($scope,config,$location,rest,save,$document,modalService) {
 	
 	$scope.data={};
@@ -574,7 +575,7 @@ var appBreweries=angular.module("BreweriesApp", []).
 controller("BreweriesController", ["$scope","rest","$timeout","$location","config","$route","save",require("./breweriesController")]).
 controller("BreweryAddController",["$scope","config","$location","rest","save","$document","modalService",require("./breweryAddController")]).
 controller("BreweryUpdateController",["$scope","config","$location","rest","save","$document","modalService","$controller",require("./breweryUpdateController")]).
-controller("BreweryDetailController",["$scope","config","$location","rest","$document","modalService",require("./breweryDetailController")]);
+controller("BreweryDetailController",["$scope","config","$location","rest","save","$document","modalService","$controller",require("./breweryDetailController")]);
 module.exports=angular.module("BreweriesApp").name; 
 },{"./breweriesController":12,"./breweryAddController":14,"./breweryDetailController":15,"./breweryUpdateController":16}],14:[function(require,module,exports){
 module.exports=function($scope,config,$location,rest,save,$document,modalService) {
@@ -856,6 +857,10 @@ module.exports=function($scope,$location,save){
 };
 },{}],23:[function(require,module,exports){
 module.exports=function($http,$resource,$location,restConfig,$sce) {
+
+}
+},{}],24:[function(require,module,exports){
+module.exports=function($http,$resource,$location,restConfig,$sce) {
 	var self=this;
 	if(angular.isUndefined(this.messages))
 		this.messages=new Array();
@@ -878,6 +883,7 @@ module.exports=function($http,$resource,$location,restConfig,$sce) {
 			response[what]=data;
 			restConfig[what].all=data;
 			response.load=false;
+			
 		}).
 		error(function(data, status, headers, config) {
 			self.addMessage({type: "danger", content: "Erreur de connexion au serveur, statut de la réponse : "+status});
@@ -958,8 +964,22 @@ module.exports=function($http,$resource,$location,restConfig,$sce) {
 	this.clearMessages=function(){
 		self.messages.length=0;
 	};
+	
+	this.connect=function(response,callback){
+		var request = $http({
+		   method: "POST",
+		   url: restConfig.server.restServerUrl+"user/connect",
+		   data: $.param(response.posted),
+		   headers: self.headers
+		});
+		 request.success(function(data, status, headers, config) {
+	            callback(data);//Connexion réussie
+	        }).error(function(data, status, headers, config){
+	            self.addMessage({type: "warning", content:"Erreur de connexion au serveur, statut de la réponse : "+status+"<br>"+data.message});
+	        });
+	}
 };
-},{}],24:[function(require,module,exports){
+},{}],25:[function(require,module,exports){
 module.exports=function(rest,config,$route){
 	var self=this;
 	this.dataScope={};
