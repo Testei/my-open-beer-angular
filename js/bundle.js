@@ -574,8 +574,8 @@ var appBreweries=angular.module("BreweriesApp", []).
 controller("BreweriesController", ["$scope","rest","$timeout","$location","config","$route","save",require("./breweriesController")]).
 controller("BreweryAddController",["$scope","config","$location","rest","save","$document","modalService",require("./breweryAddController")]).
 controller("BreweryUpdateController",["$scope","config","$location","rest","save","$document","modalService","$controller",require("./breweryUpdateController")]).
-controller("BreweryDetailController",["$scope","config","$location","rest","save","$document","modalService","$controller",require("./breweryDetailController")]);
-module.exports=angular.module("BreweriesApp").name;
+controller("BreweryDetailController",["$scope","config","$location","rest","$document","modalService",require("./breweryDetailController")]);
+module.exports=angular.module("BreweriesApp").name; 
 },{"./breweriesController":12,"./breweryAddController":14,"./breweryDetailController":15,"./breweryUpdateController":16}],14:[function(require,module,exports){
 module.exports=function($scope,config,$location,rest,save,$document,modalService) {
 	
@@ -642,25 +642,21 @@ module.exports=function($scope,config,$location,rest,$document,modalService){
 	}
 	$scope.activeBrewery=config.activeBrewery;
 	
-	var beers = "beers/" + config.activeBrewery.id;
+	var beers = "beers/brewery/" + config.activeBrewery.id;
 	rest.getAll($scope.data, beers);
 
 	$scope.countBeers = function(){
-		// Soit la fontion ne s'execute pas (sur à 99%)
-		// Soit quelque chose met à jour les données affichées juste après l'affichage (1%)
 		if($scope.data[beers] == undefined){
 			return 0;
 		}
 		else{
-			miahou = $scope.data[beers].length;
-			return miahou;
+			return $scope.data[beers].length;
 		}
 	};
 
-	$scope.viewBeers = function(){
+	$scope.viewBeers = function(){//vue avec plusieurs bieres
 		//A COMPLETER
 	}
-
 };
 },{}],16:[function(require,module,exports){
 module.exports=function($scope,config,$location,rest,save,$document,modalService, $controller){

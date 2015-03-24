@@ -7,23 +7,19 @@ module.exports=function($scope,config,$location,rest,$document,modalService){
 	}
 	$scope.activeBrewery=config.activeBrewery;
 	
-	var beers = "beers/" + config.activeBrewery.id;
+	var beers = "beers/brewery/" + config.activeBrewery.id;
 	rest.getAll($scope.data, beers);
 
 	$scope.countBeers = function(){
-		// Soit la fontion ne s'execute pas (sur à 99,99%)
-		// Soit quelque chose met à jour les données affichées juste après l'affichage (0,01%)
 		if($scope.data[beers] == undefined){
 			return 0;
 		}
 		else{
-			miahou = $scope.data[beers].length;
-			return miahou;
+			return $scope.data[beers].length;
 		}
 	};
 
-	$scope.viewBeers = function(){
+	$scope.viewBeers = function(){//vue avec plusieurs bieres
 		//A COMPLETER
 	}
-
 };
