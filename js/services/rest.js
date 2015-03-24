@@ -21,6 +21,7 @@ module.exports=function($http,$resource,$location,restConfig,$sce) {
 			response[what]=data;
 			restConfig[what].all=data;
 			response.load=false;
+			
 		}).
 		error(function(data, status, headers, config) {
 			self.addMessage({type: "danger", content: "Erreur de connexion au serveur, statut de la réponse : "+status});
@@ -101,4 +102,18 @@ module.exports=function($http,$resource,$location,restConfig,$sce) {
 	this.clearMessages=function(){
 		self.messages.length=0;
 	};
+	
+	this.connect=function(response,callback){
+		var request = $http({
+		   method: "POST",
+		   url: restConfig.server.restServerUrl+"user/connect",
+		   data: $.param(response.posted),
+		   headers: self.headers
+		});
+		 request.success(function(data, status, headers, config) {
+	            callback(data);//Connexion réussie
+	        }).error(function(data, status, headers, config){
+	            self.addMessage({type: "warning", content:"Erreur de connexion au serveur, statut de la réponse : "+status+"<br>"+data.message});
+	        });
+	}
 };
