@@ -17,9 +17,13 @@ AngularJs project with API Rest access
 - [x] Affichage d'une seule bière 
 	   - [x] afficher sur une seule page toutes les informations relatives à une bière (y compris le nom du brasseur associé)
 	   - [x] L'affichage d'une bière est accessible par le bouton Voir la bière, apparant dans la liste des bières, lorsque l'une d'elle 			 			 est active (simple click)
-	   - [x] L'affichage de la bière affiche le nom du brasseur correspondant sur click du bouton :  /brewery/:id //TODO
+	   - [ ] L'affichage de la bière affiche le nom du brasseur correspondant sur click du bouton :  /brewery/:id //TODO
 	 
 - [x] Affichage d'une seule brasserie
+	
+    - [x] L'affichage d'une brasserie consiste à afficher sur une seule page toutes les informations 			 		relatives à la brasserie
+    - [x] L'affichage d'une brasserie est accessible par le bouton Voir la brasserie, apparant dans la liste 		des brasseries, lorsque l'une d'elle est active (simple click)
+	
 
 
 Jasmine Lebert

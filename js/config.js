@@ -1,6 +1,7 @@
 module.exports=function($routeProvider,$locationProvider,$httpProvider) {
 	//$httpProvider.defaults.useXDomain = true;
 	//$httpProvider.defaults.withCredentials = true;
+	//Ce fichier permet de définir les différentes routes (chemin) par rapport au différents fichiers
 	delete $httpProvider.defaults.headers.common["X-Requested-With"];
 	$routeProvider.
 	when('/', {

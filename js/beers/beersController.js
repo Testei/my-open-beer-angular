@@ -1,4 +1,8 @@
 module.exports=function($scope,rest,$timeout,$location,config,$route,save) {
+	/*
+	 * Réalisé a partir du fichier breweriesController
+	 */
+	
 	$scope.data={load:false};
 
 	$scope.sortBy={field:"name",asc:false};
@@ -27,7 +31,7 @@ module.exports=function($scope,rest,$timeout,$location,config,$route,save) {
 	$scope.showUpdate=function(){
 		return angular.isDefined($scope.activeBeer);
 	};
-	
+	//Fonction rajouter pour voir les details de la bière activé
 	$scope.showDetails=function(){
 		return angular.isDefined($scope.activeBeer);
 	};
@@ -92,7 +96,7 @@ module.exports=function($scope,rest,$timeout,$location,config,$route,save) {
 	}
 	
 
-	
+	//même fonction que la fonction edit mais raméne à la vue details  au lieu de update
 	$scope.see=function(beer){
 		if(angular.isDefined(beer))
 			$scope.activeBeer=beer;

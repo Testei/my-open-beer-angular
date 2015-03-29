@@ -142,7 +142,7 @@ controller("MainController", ["$scope","$location","save","$window",require("./m
 controller("SaveController", ["$scope","$location","save",require("./save/saveController")]).
 service("rest", ["$http","$resource","$location","config","$sce",require("./services/rest")]).
 service("save", ["rest","config","$route",require("./services/save")]).
-service("connect", ["rest","config","$route",require("./services/connection")]).
+service("connexion", ["rest","config","$route",require("./services/connexion")]).
 config(["$routeProvider","$locationProvider","$httpProvider",require("./config")]).
 filter("NotDeletedFilter",require("./addons/notDeletedFilter")).
 directive("sortBy", [require("./addons/sortBy")]).
@@ -172,7 +172,7 @@ run(['$rootScope','$location', '$routeParams', function($rootScope, $location, $
 }]
 ).factory("config", require("./config/configFactory"));
 
-},{"./addons/drag":1,"./addons/modal":2,"./addons/modalService":3,"./addons/notDeletedFilter":4,"./addons/sortBy":5,"./beers/beersModule":11,"./breweries/breweriesModule":13,"./config":17,"./config/configFactory":19,"./config/configModule":20,"./mainController":21,"./save/saveController":22,"./services/connection":23,"./services/rest":24,"./services/save":25}],7:[function(require,module,exports){
+},{"./addons/drag":1,"./addons/modal":2,"./addons/modalService":3,"./addons/notDeletedFilter":4,"./addons/sortBy":5,"./beers/beersModule":11,"./breweries/breweriesModule":13,"./config":17,"./config/configFactory":19,"./config/configModule":20,"./mainController":21,"./save/saveController":22,"./services/connexion":23,"./services/rest":24,"./services/save":25}],7:[function(require,module,exports){
 module.exports=function($scope,config,$location,rest,save,$document,modalService) {
 	
 	$scope.data={};
@@ -238,6 +238,7 @@ module.exports=function($scope,config,$location,rest,$document,modalService){
 	}
 	$scope.activeBeer=config.activeBeer;
 	
+	//récupere les données de la brasserie produisant la Biere
 	var brewery = "breweries/" + config.activeBeer.idBrewery;
 	rest.getAll($scope.data, brewery);
 
@@ -246,10 +247,11 @@ module.exports=function($scope,config,$location,rest,$document,modalService){
 	}
 
 	$scope.viewBrewery = function(){
-	//	if(angular.isDefined($scope.data[brewery]))
-	//	config.activeBrewery=angular.copy($scope.data[brewery]);
-	//	config.activeBrewery.reference=$scope.data[brewery];
-		$location.path("breweries/details");
+	//non réussi à coriger : renvoie sur la liste des brasseries et non sur celle qui est selectionner
+		config.activeBeer=angular.copy($scope.data[brewery].id);
+		config.activeBeer.reference=$scope.data[brewery].id;
+	
+		$location.path("breweries/details/");
 	}
 
 };
@@ -857,7 +859,16 @@ module.exports=function($scope,$location,save){
 };
 },{}],23:[function(require,module,exports){
 module.exports=function($http,$resource,$location,restConfig,$sce) {
-
+	/* regarder comme update()
+	 * faire meme principe pour recuperer les données
+	 * 
+	 * recup email + mdp : tester 
+	 * 
+	 * dans la vue : si connecter afficher se déco.
+	 * 
+	 * recuperation des données de la table users
+	 * 
+	 */
 }
 },{}],24:[function(require,module,exports){
 module.exports=function($http,$resource,$location,restConfig,$sce) {
@@ -964,7 +975,7 @@ module.exports=function($http,$resource,$location,restConfig,$sce) {
 	this.clearMessages=function(){
 		self.messages.length=0;
 	};
-	
+	// FONCTION connecter : http://slamwiki.kobject.net/slam4/richclient/angularjs/project/openbeerdatabase/rest
 	this.connect=function(response,callback){
 		var request = $http({
 		   method: "POST",

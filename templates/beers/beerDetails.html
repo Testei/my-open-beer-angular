@@ -20,8 +20,9 @@
 					<div class="col-sm-9">
 						<p class="form-control">{{viewBreweryName()}}</p>
 					</div>
-					<div class="col-sm-3">
-						<button class="btn btn-default" ng-click="viewBrewery()">Voir la brasserie</button>
+					<div class="col-sm-3" role="group" aria-label="DetailBrasseur">
+						<!-- ne fonctionne pas comme il faut -->
+						<a class="btn btn-default" data-ng-click="viewBrewery()">Voir la brasserie</a>
 					</div>
 					<div class="col-sm-3">
 						<br>
