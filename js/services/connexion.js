@@ -6,5 +6,7 @@ module.exports=function($http,$resource,$location,restConfig,$sce) {
 	 * 
 	 * dans la vue : si connecter afficher se déco.
 	 * 
+	 * recuperation des données de la table users
+	 * 
 	 */
 }
